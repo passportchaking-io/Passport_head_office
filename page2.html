@@ -1,0 +1,1726 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width,
+      initial-scale=1.0,
+      maximum-scale=1.0,
+      user-scalable=no">
+
+<title>আবেদন সফল — Passport Help DEMO</title>
+
+<style>
+
+/* =========================
+   RESET
+========================= */
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html,body{
+    width:100%;
+    min-height:100%;
+}
+
+body{
+    font-family:
+    "Noto Sans Bengali",
+    "Nirmala UI",
+    "Segoe UI",
+    Arial,
+    sans-serif;
+
+    background:#eefaf8;
+    color:#06452f;
+
+    overflow-x:hidden;
+}
+
+
+/* =========================
+   DEMO BAR
+========================= */
+
+.demo-bar{
+    height:30px;
+
+    background:#075c3b;
+
+    color:#fff;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:11px;
+    font-weight:800;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.header{
+
+    height:116px;
+
+    background:#fff;
+
+    display:flex;
+    align-items:center;
+
+    padding:10px 43px;
+
+    border-bottom:1px solid #e5eee9;
+}
+
+
+/* Demo logo */
+
+.logo{
+
+    width:84px;
+    height:84px;
+
+    border:3px solid #07804e;
+
+    border-radius:50%;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:#f9fffc;
+
+    flex-shrink:0;
+}
+
+.logo-inner{
+
+    width:66px;
+    height:66px;
+
+    border-radius:50%;
+
+    border:2px solid #d71920;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    text-align:center;
+
+    color:#087044;
+
+    font-size:8px;
+    font-weight:900;
+
+    line-height:1.2;
+}
+
+
+/* Header text */
+
+.header-text{
+
+    margin-left:20px;
+}
+
+.header-title{
+
+    font-size:30px;
+
+    font-weight:900;
+
+    color:#075c3b;
+
+    line-height:1.1;
+}
+
+.header-subtitle{
+
+    margin-top:8px;
+
+    font-size:18px;
+
+    color:#174c79;
+
+    font-weight:700;
+}
+
+
+/* Menu */
+
+.menu{
+
+    margin-left:auto;
+
+    width:68px;
+    height:62px;
+
+    border:1px solid #e2ece8;
+
+    border-radius:13px;
+
+    background:#fff;
+
+    color:#075c3b;
+
+    font-size:34px;
+}
+
+
+/* =========================
+   SUCCESS HERO
+========================= */
+
+.success-hero{
+
+    position:relative;
+
+    min-height:395px;
+
+    padding:24px 20px 10px;
+
+    text-align:center;
+
+    overflow:hidden;
+
+    background:
+
+    radial-gradient(
+        ellipse at center,
+        #ffffff 0%,
+        #e8faff 52%,
+        #dff7ee 100%
+    );
+}
+
+
+/* Decorative green waves */
+
+.success-hero:before{
+
+    content:"";
+
+    position:absolute;
+
+    width:700px;
+    height:250px;
+
+    left:50%;
+    bottom:-175px;
+
+    transform:translateX(-50%);
+
+    border-radius:50%;
+
+    background:#d8f6eb;
+
+    opacity:.8;
+}
+
+.success-hero:after{
+
+    content:"";
+
+    position:absolute;
+
+    width:800px;
+    height:220px;
+
+    left:50%;
+    bottom:-190px;
+
+    transform:translateX(-50%);
+
+    border-radius:50%;
+
+    border-top:30px solid rgba(20,160,110,.12);
+}
+
+
+/* Confetti */
+
+.confetti{
+    position:absolute;
+
+    font-size:25px;
+
+    font-weight:900;
+}
+
+.c1{left:75px;top:55px;color:#16a05b;transform:rotate(-25deg)}
+.c2{left:145px;top:45px;color:#f3c400;transform:rotate(20deg)}
+.c3{left:95px;top:145px;color:#1688ed;transform:rotate(-15deg)}
+.c4{right:95px;top:70px;color:#13a35c;transform:rotate(35deg)}
+.c5{right:155px;top:45px;color:#1688ed;transform:rotate(-20deg)}
+.c6{right:75px;top:160px;color:#f3c400;transform:rotate(25deg)}
+.c7{left:25px;top:215px;color:#16a05b}
+.c8{right:25px;top:225px;color:#13a35c}
+
+
+/* =========================
+   BIG CHECK
+========================= */
+
+.big-check{
+
+    width:145px;
+    height:145px;
+
+    margin:0 auto;
+
+    border-radius:50%;
+
+    background:#16b75f;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    color:#fff;
+
+    font-size:92px;
+
+    font-weight:900;
+
+    line-height:1;
+
+    box-shadow:
+    0 8px 25px rgba(0,150,80,.16);
+
+    position:relative;
+    z-index:2;
+}
+
+
+/* =========================
+   SUCCESS TITLE
+========================= */
+
+.success-title{
+
+    position:relative;
+    z-index:2;
+
+    margin-top:22px;
+
+    font-size:34px;
+
+    font-weight:900;
+
+    color:#075c3b;
+
+    line-height:1.3;
+}
+
+.success-description{
+
+    position:relative;
+    z-index:2;
+
+    margin:12px auto 0;
+
+    max-width:800px;
+
+    color:#15517b;
+
+    font-size:21px;
+
+    font-weight:700;
+
+    line-height:1.6;
+}
+
+
+/* =========================
+   PROCESS BOX
+========================= */
+
+.process-box{
+
+    position:relative;
+    z-index:2;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    width:650px;
+    max-width:90%;
+
+    min-height:58px;
+
+    margin:18px auto 0;
+
+    padding:8px 20px;
+
+    border-radius:35px;
+
+    background:#e7fbf2;
+
+    border:2px solid #c2eedc;
+
+    color:#126243;
+
+    font-size:17px;
+
+    font-weight:800;
+}
+
+.process-icon{
+
+    width:43px;
+    height:43px;
+
+    margin-right:14px;
+
+    border-radius:50%;
+
+    background:#126b48;
+
+    color:#fff;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:25px;
+}
+
+
+/* =========================
+   INFORMATION CARD
+========================= */
+
+.info-wrapper{
+
+    position:relative;
+
+    z-index:5;
+
+    margin:-2px 48px 35px;
+
+    padding:15px;
+
+    background:#fff;
+
+    border-radius:24px;
+
+    box-shadow:
+    0 6px 25px rgba(0,0,0,.07);
+}
+
+
+/* Green card heading */
+
+.info-heading{
+
+    height:72px;
+
+    border-radius:18px 18px 13px 13px;
+
+    background:#087b55;
+
+    color:#fff;
+
+    display:flex;
+    align-items:center;
+
+    padding:0 27px;
+
+    font-size:25px;
+
+    font-weight:900;
+}
+
+.info-heading-icon{
+
+    font-size:34px;
+
+    margin-right:16px;
+}
+
+
+/* =========================
+   INFO ROWS
+========================= */
+
+.info-list{
+
+    padding:14px 18px 8px;
+
+    border:2px solid #dcecf0;
+
+    border-top:0;
+
+    border-radius:0 0 18px 18px;
+}
+
+.info-row{
+
+    min-height:58px;
+
+    display:grid;
+
+    grid-template-columns:65px 210px 1fr;
+
+    align-items:center;
+
+    border-bottom:1px solid #e1edf0;
+
+    color:#0b4770;
+}
+
+.info-row:last-child{
+
+    border-bottom:0;
+}
+
+
+.row-icon{
+
+    width:45px;
+    height:45px;
+
+    border-radius:12px;
+
+    background:#edf8f4;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:25px;
+
+    color:#08734c;
+}
+
+.row-label{
+
+    font-size:17px;
+
+    font-weight:800;
+
+    border-right:1px solid #e0ebee;
+}
+
+.row-value{
+
+    padding-left:25px;
+
+    font-size:17px;
+
+    font-weight:800;
+
+    color:#124c75;
+
+    word-break:break-word;
+}
+
+
+/* =========================
+   CONFIRMATION
+========================= */
+
+.confirmation{
+
+    margin-top:18px;
+
+    min-height:88px;
+
+    padding:12px 25px;
+
+    border-radius:18px;
+
+    background:#e7faf1;
+
+    border:1px solid #ccefe0;
+
+    display:flex;
+
+    align-items:center;
+
+    color:#116344;
+}
+
+.confirm-icon{
+
+    width:55px;
+    height:55px;
+
+    margin-right:20px;
+
+    border-radius:50%;
+
+    background:#18b961;
+
+    color:#fff;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:36px;
+
+    font-weight:900;
+
+    flex-shrink:0;
+}
+
+.confirm-text{
+
+    font-size:16px;
+
+    font-weight:800;
+
+    line-height:1.55;
+}
+
+
+/* =========================
+   BUTTONS
+========================= */
+
+.home-button{
+
+    width:530px;
+    max-width:90%;
+
+    height:70px;
+
+    margin:27px auto 0;
+
+    border-radius:38px;
+
+    background:
+    linear-gradient(
+        90deg,
+        #1689f0,
+        #168df4
+    );
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    gap:17px;
+
+    color:#fff;
+
+    text-decoration:none;
+
+    font-size:24px;
+
+    font-weight:900;
+
+    box-shadow:
+    0 7px 18px rgba(0,110,240,.18);
+}
+
+.home-icon{
+
+    font-size:31px;
+}
+
+
+.again-button{
+
+    width:460px;
+    max-width:80%;
+
+    height:58px;
+
+    margin:13px auto 4px;
+
+    border:2px solid #08778a;
+
+    border-radius:32px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    gap:15px;
+
+    color:#064c69;
+
+    background:#fff;
+
+    text-decoration:none;
+
+    font-size:19px;
+
+    font-weight:900;
+}
+
+
+/* =========================
+   BOTTOM DECORATION
+========================= */
+
+.bottom-picture{
+
+    height:150px;
+
+    position:relative;
+
+    overflow:hidden;
+
+    background:
+    linear-gradient(
+        to bottom,
+        #e9faf5,
+        #d9f4e9
+    );
+}
+
+.monument{
+
+    position:absolute;
+
+    bottom:0;
+    left:50px;
+
+    width:120px;
+    height:110px;
+}
+
+.monument:before{
+
+    content:"";
+
+    position:absolute;
+
+    left:52px;
+    bottom:0;
+
+    width:8px;
+    height:100px;
+
+    background:#64b99c;
+
+    transform:skew(-7deg);
+}
+
+.monument:after{
+
+    content:"";
+
+    position:absolute;
+
+    left:25px;
+    bottom:0;
+
+    width:65px;
+    height:85px;
+
+    border-left:3px solid #64b99c;
+
+    border-right:3px solid #64b99c;
+
+    border-top:85px solid transparent;
+
+}
+
+
+/* Text decoration */
+
+.future-text{
+
+    position:absolute;
+
+    left:50%;
+
+    bottom:30px;
+
+    transform:translateX(-50%);
+
+    width:280px;
+
+    text-align:center;
+
+    color:#087044;
+
+    font-size:22px;
+
+    font-weight:900;
+
+    line-height:1.25;
+}
+
+
+/* Passport decoration */
+
+.passport-decoration{
+
+    position:absolute;
+
+    right:35px;
+
+    bottom:-15px;
+
+    width:120px;
+
+    height:165px;
+
+    background:#075c3b;
+
+    border-radius:8px;
+
+    transform:rotate(-10deg);
+
+    box-shadow:0 7px 15px rgba(0,0,0,.18);
+
+    color:#e8cf59;
+
+    text-align:center;
+
+    padding-top:20px;
+
+    font-size:10px;
+
+    font-weight:900;
+}
+
+.passport-decoration .star{
+
+    width:45px;
+    height:45px;
+
+    border:2px solid #e8cf59;
+
+    border-radius:50%;
+
+    margin:15px auto;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:17px;
+}
+
+
+/* =========================
+   BOTTOM NAV
+========================= */
+
+.bottom-nav{
+
+    height:100px;
+
+    background:#006b43;
+
+    display:grid;
+
+    grid-template-columns:
+    1fr 1.5fr 1fr;
+
+    align-items:center;
+
+    padding:10px 30px;
+
+    color:#fff;
+}
+
+.nav-item{
+
+    height:65px;
+
+    border-radius:35px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    gap:12px;
+
+    color:#fff;
+
+    text-decoration:none;
+
+    font-size:19px;
+
+    font-weight:800;
+}
+
+.nav-item.active{
+
+    background:#087e53;
+}
+
+.nav-icon{
+
+    font-size:28px;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:600px){
+
+    .demo-bar{
+        height:29px;
+        font-size:10px;
+    }
+
+
+    /* HEADER */
+
+    .header{
+
+        height:92px;
+
+        padding:8px 15px;
+    }
+
+    .logo{
+
+        width:61px;
+        height:61px;
+    }
+
+    .logo-inner{
+
+        width:48px;
+        height:48px;
+
+        font-size:6px;
+    }
+
+    .header-text{
+
+        margin-left:10px;
+    }
+
+    .header-title{
+
+        font-size:20px;
+    }
+
+    .header-subtitle{
+
+        font-size:10px;
+
+        margin-top:4px;
+    }
+
+    .menu{
+
+        width:50px;
+        height:48px;
+
+        font-size:27px;
+    }
+
+
+    /* HERO */
+
+    .success-hero{
+
+        min-height:365px;
+
+        padding:20px 12px 10px;
+    }
+
+    .big-check{
+
+        width:112px;
+        height:112px;
+
+        font-size:70px;
+    }
+
+    .success-title{
+
+        margin-top:18px;
+
+        font-size:26px;
+    }
+
+    .success-description{
+
+        margin-top:9px;
+
+        font-size:15px;
+
+        line-height:1.65;
+    }
+
+    .process-box{
+
+        max-width:92%;
+
+        min-height:54px;
+
+        padding:7px 10px;
+
+        font-size:12px;
+    }
+
+    .process-icon{
+
+        width:37px;
+        height:37px;
+
+        font-size:21px;
+
+        margin-right:9px;
+    }
+
+
+    /* CONFETTI */
+
+    .c1{left:20px;top:55px}
+    .c2{left:60px;top:45px}
+    .c3{left:25px;top:145px}
+    .c4{right:30px;top:60px}
+    .c5{right:70px;top:43px}
+    .c6{right:20px;top:145px}
+    .c7{left:10px;top:210px}
+    .c8{right:10px;top:215px}
+
+
+    /* INFO CARD */
+
+    .info-wrapper{
+
+        margin:-3px 12px 20px;
+
+        padding:10px;
+
+        border-radius:19px;
+    }
+
+    .info-heading{
+
+        height:59px;
+
+        border-radius:14px 14px 10px 10px;
+
+        padding:0 17px;
+
+        font-size:20px;
+    }
+
+    .info-heading-icon{
+
+        font-size:27px;
+
+        margin-right:10px;
+    }
+
+
+    .info-list{
+
+        padding:8px 10px 5px;
+    }
+
+    .info-row{
+
+        min-height:56px;
+
+        grid-template-columns:45px 105px 1fr;
+    }
+
+    .row-icon{
+
+        width:38px;
+        height:38px;
+
+        font-size:20px;
+
+        border-radius:10px;
+    }
+
+    .row-label{
+
+        font-size:14px;
+    }
+
+    .row-value{
+
+        padding-left:13px;
+
+        font-size:13px;
+    }
+
+
+    /* CONFIRM */
+
+    .confirmation{
+
+        min-height:74px;
+
+        margin-top:13px;
+
+        padding:9px 12px;
+    }
+
+    .confirm-icon{
+
+        width:45px;
+        height:45px;
+
+        margin-right:11px;
+
+        font-size:28px;
+    }
+
+    .confirm-text{
+
+        font-size:12px;
+
+        line-height:1.5;
+    }
+
+
+    /* BUTTONS */
+
+    .home-button{
+
+        width:92%;
+
+        height:62px;
+
+        margin-top:20px;
+
+        font-size:19px;
+
+        gap:10px;
+    }
+
+    .home-icon{
+
+        font-size:26px;
+    }
+
+    .again-button{
+
+        width:82%;
+
+        height:51px;
+
+        margin-top:11px;
+
+        font-size:15px;
+
+        gap:9px;
+    }
+
+
+    /* DECORATION */
+
+    .bottom-picture{
+
+        height:115px;
+    }
+
+    .monument{
+
+        left:5px;
+
+        transform:scale(.7);
+
+        transform-origin:bottom left;
+    }
+
+    .future-text{
+
+        bottom:24px;
+
+        width:200px;
+
+        font-size:15px;
+    }
+
+    .passport-decoration{
+
+        right:8px;
+
+        width:82px;
+        height:112px;
+
+        font-size:7px;
+
+        padding-top:13px;
+    }
+
+    .passport-decoration .star{
+
+        width:30px;
+        height:30px;
+
+        margin:9px auto;
+
+        font-size:12px;
+    }
+
+
+    /* NAV */
+
+    .bottom-nav{
+
+        height:74px;
+
+        padding:7px 8px;
+    }
+
+    .nav-item{
+
+        height:56px;
+
+        font-size:13px;
+
+        gap:5px;
+    }
+
+    .nav-icon{
+
+        font-size:23px;
+    }
+
+}
+
+
+/* =========================
+   SMALL PHONES
+========================= */
+
+@media(max-width:380px){
+
+    .header-title{
+        font-size:17px;
+    }
+
+    .header-subtitle{
+        font-size:9px;
+    }
+
+    .success-title{
+        font-size:23px;
+    }
+
+    .success-description{
+        font-size:13px;
+    }
+
+    .info-row{
+        grid-template-columns:40px 92px 1fr;
+    }
+
+    .row-label{
+        font-size:12px;
+    }
+
+    .row-value{
+        font-size:11px;
+    }
+
+    .nav-item{
+        font-size:11px;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     DEMO
+========================= -->
+
+<div class="demo-bar">
+    DEMO — এটি কোনো সরকারি ওয়েবসাইট নয়
+</div>
+
+
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header class="header">
+
+    <div class="logo">
+
+        <div class="logo-inner">
+            PASSPORT<br>
+            DEMO
+        </div>
+
+    </div>
+
+
+    <div class="header-text">
+
+        <div class="header-title">
+            বাংলাদেশ পাসপোর্ট সহায়তা
+        </div>
+
+        <div class="header-subtitle">
+            তথ্য ও সেবা নির্দেশিকা — ডেমো
+        </div>
+
+    </div>
+
+
+    <button class="menu"
+            type="button"
+            aria-label="Menu">
+
+        ☰
+
+    </button>
+
+</header>
+
+
+
+<!-- =========================
+     SUCCESS HERO
+========================= -->
+
+<section class="success-hero">
+
+
+    <!-- Confetti -->
+
+    <span class="confetti c1">◆</span>
+    <span class="confetti c2">◆</span>
+    <span class="confetti c3">◆</span>
+    <span class="confetti c4">◆</span>
+    <span class="confetti c5">◆</span>
+    <span class="confetti c6">◆</span>
+    <span class="confetti c7">◆</span>
+    <span class="confetti c8">◆</span>
+
+
+    <!-- Check -->
+
+    <div class="big-check">
+        ✓
+    </div>
+
+
+    <!-- Heading -->
+
+    <h1 class="success-title">
+        আপনার আবেদন সফলভাবে গৃহীত হয়েছে!
+    </h1>
+
+
+    <p class="success-description">
+        আপনার পাসপোর্ট সমস্যার জন্য আবেদনটি
+        সফলভাবে জমা হয়েছে।<br>
+        আমরা দ্রুত আপনার সাথে যোগাযোগ করব।
+    </p>
+
+
+    <!-- Processing -->
+
+    <div class="process-box">
+
+        <div class="process-icon">
+            ◷
+        </div>
+
+        আপনার আবেদনটি ২৪ ঘণ্টার মধ্যে
+        প্রক্রিয়াকরণ করা হবে।
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     INFORMATION CARD
+========================= -->
+
+<section class="info-wrapper">
+
+
+    <!-- CARD TITLE -->
+
+    <div class="info-heading">
+
+        <span class="info-heading-icon">
+            ☷
+        </span>
+
+        আবেদনের তথ্য
+
+    </div>
+
+
+    <!-- INFO -->
+
+    <div class="info-list">
+
+
+        <!-- REFERENCE -->
+
+        <div class="info-row">
+
+            <div class="row-icon">
+                ▣
+            </div>
+
+            <div class="row-label">
+                রেফারেন্স নম্বর :
+            </div>
+
+            <div class="row-value"
+                 id="reference">
+                PPD-DEMO
+            </div>
+
+        </div>
+
+
+        <!-- NAME -->
+
+        <div class="info-row">
+
+            <div class="row-icon">
+                👤
+            </div>
+
+            <div class="row-label">
+                নাম :
+            </div>
+
+            <div class="row-value"
+                 id="userName">
+                —
+            </div>
+
+        </div>
+
+
+        <!-- MOBILE -->
+
+        <div class="info-row">
+
+            <div class="row-icon">
+                ☎
+            </div>
+
+            <div class="row-label">
+                মোবাইল নম্বর :
+            </div>
+
+            <div class="row-value"
+                 id="userMobile">
+                —
+            </div>
+
+        </div>
+
+
+        <!-- DATE -->
+
+        <div class="info-row">
+
+            <div class="row-icon">
+                ▣
+            </div>
+
+            <div class="row-label">
+                আবেদনের তারিখ :
+            </div>
+
+            <div class="row-value"
+                 id="applicationDate">
+                —
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- CONFIRMATION -->
+
+    <div class="confirmation">
+
+        <div class="confirm-icon">
+            ✓
+        </div>
+
+        <div class="confirm-text">
+
+            আপনার আবেদন সফলভাবে জমা হয়েছে।<br>
+
+            ধন্যবাদ, পাসপোর্ট সহায়তা — DEMO।
+
+        </div>
+
+    </div>
+
+
+
+    <!-- HOME -->
+
+    <a
+        class="home-button"
+        href="index.html">
+
+        <span class="home-icon">
+            🏠
+        </span>
+
+        হোম পেজে যান →
+
+    </a>
+
+
+
+    <!-- AGAIN -->
+
+    <a
+        class="again-button"
+        href="contact.html">
+
+        <span>
+            ▣
+        </span>
+
+        আবার আবেদন করুন
+
+        <span>
+            ↻
+        </span>
+
+    </a>
+
+</section>
+
+
+
+<!-- =========================
+     DECORATIVE BOTTOM
+========================= -->
+
+<section class="bottom-picture">
+
+
+    <div class="monument"></div>
+
+
+    <div class="future-text">
+
+        সঠিক তথ্য<br>
+        সঠিক পাসপোর্ট<br>
+        উজ্জ্বল ভবিষ্যৎ
+
+    </div>
+
+
+    <div class="passport-decoration">
+
+        PASSPORT
+
+        <div class="star">
+            ★
+        </div>
+
+        DEMO
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================
+     BOTTOM NAV
+========================= -->
+
+<nav class="bottom-nav">
+
+
+    <a
+        href="index.html"
+        class="nav-item">
+
+        <span class="nav-icon">
+            🏠
+        </span>
+
+        <span>
+            হোম
+        </span>
+
+    </a>
+
+
+    <a
+        href="contact.html"
+        class="nav-item active">
+
+        <span class="nav-icon">
+            ☎
+        </span>
+
+        <span>
+            যোগাযোগ
+        </span>
+
+    </a>
+
+
+    <a
+        href="contact.html"
+        class="nav-item">
+
+        <span class="nav-icon">
+            ←
+        </span>
+
+        <span>
+            পিছনে যান
+        </span>
+
+    </a>
+
+</nav>
+
+
+
+<!-- =========================
+     JAVASCRIPT
+========================= -->
+
+<script>
+
+/* =========================
+   GET FORM DATA
+========================= */
+
+const params = new URLSearchParams(
+    window.location.search
+);
+
+
+/* Name */
+
+const name =
+    params.get("name") ||
+    params.get("userName") ||
+    "—";
+
+
+/* Mobile */
+
+const mobile =
+    params.get("mobile") ||
+    params.get("contact") ||
+    "—";
+
+
+document.getElementById("userName")
+    .textContent = name;
+
+
+document.getElementById("userMobile")
+    .textContent = mobile;
+
+
+/* =========================
+   DEMO REFERENCE NUMBER
+========================= */
+
+const randomNumber =
+    Math.floor(
+        100000 +
+        Math.random() * 900000
+    );
+
+document.getElementById("reference")
+    .textContent =
+    "PPD" + randomNumber;
+
+
+/* =========================
+   DATE & TIME
+========================= */
+
+const now = new Date();
+
+const months = [
+    "জানুয়ারি",
+    "ফেব্রুয়ারি",
+    "মার্চ",
+    "এপ্রিল",
+    "মে",
+    "জুন",
+    "জুলাই",
+    "আগস্ট",
+    "সেপ্টেম্বর",
+    "অক্টোবর",
+    "নভেম্বর",
+    "ডিসেম্বর"
+];
+
+let hours = now.getHours();
+
+let minutes = now.getMinutes();
+
+let ampm = hours >= 12
+    ? "PM"
+    : "AM";
+
+hours = hours % 12;
+
+hours = hours || 12;
+
+minutes =
+    minutes < 10
+    ? "0" + minutes
+    : minutes;
+
+
+const dateText =
+    now.getDate()
+    + " "
+    + months[now.getMonth()]
+    + " "
+    + now.getFullYear()
+    + ", "
+    + hours
+    + ":"
+    + minutes
+    + " "
+    + ampm;
+
+
+document.getElementById(
+    "applicationDate"
+).textContent = dateText;
+
+</script>
+
+
+</body>
+</html>
