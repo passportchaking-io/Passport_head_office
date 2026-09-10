@@ -1,0 +1,480 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+
+<title>পাসপোর্ট সহায়তা — যোগাযোগ</title>
+
+<style>
+*{
+  box-sizing:border-box;
+}
+
+html,body{
+  margin:0;
+  padding:0;
+}
+
+body{
+  font-family:"Noto Sans Bengali","Nirmala UI","Segoe UI",sans-serif;
+  background:#f3faf7;
+  color:#083d2c;
+  line-height:1.5;
+}
+
+/* DEMO BAR */
+.demo{
+  position:sticky;
+  top:0;
+  z-index:99;
+  background:#8b0000;
+  color:#fff;
+  text-align:center;
+  font-weight:800;
+  padding:7px 10px;
+  font-size:13px;
+}
+
+/* TOP BAR */
+.top{
+  background:#075c3b;
+  color:#fff;
+  text-align:center;
+  padding:10px 12px;
+  font-size:14px;
+  font-weight:700;
+}
+
+/* HEADER */
+.header{
+  background:#fff;
+  padding:15px 16px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  border-bottom:1px solid #e4eee9;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:11px;
+}
+
+.logo{
+  width:57px;
+  height:57px;
+  border:3px solid #087044;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  text-align:center;
+  font-size:10px;
+  line-height:1.1;
+  font-weight:900;
+  color:#087044;
+  background:#fff;
+}
+
+.brand h1{
+  font-size:21px;
+  margin:0;
+  color:#075c3b;
+}
+
+.brand p{
+  margin:2px 0 0;
+  font-size:12px;
+  color:#557066;
+}
+
+/* MENU */
+.menu{
+  width:45px;
+  height:42px;
+  border:1px solid #d7e7df;
+  border-radius:11px;
+  background:#fff;
+  font-size:25px;
+  color:#075c3b;
+}
+
+/* MAIN */
+.container{
+  padding:22px 16px 30px;
+}
+
+/* TITLE */
+.title{
+  text-align:center;
+  margin:5px 0 20px;
+}
+
+.title .tag{
+  display:inline-block;
+  background:#075c3b;
+  color:#fff;
+  border-radius:25px;
+  padding:8px 17px;
+  font-size:15px;
+  font-weight:900;
+}
+
+.title h2{
+  font-size:27px;
+  line-height:1.3;
+  color:#06457c;
+  margin:13px 0 6px;
+}
+
+.title p{
+  font-size:14px;
+  color:#60766e;
+  margin:0;
+}
+
+/* FORM CARD */
+.form-card{
+  background:#fff;
+  border-radius:20px;
+  padding:19px;
+  box-shadow:0 8px 24px rgba(0,0,0,.07);
+  border:1px solid #e2eee8;
+}
+
+/* FIELD */
+.field{
+  margin-bottom:16px;
+}
+
+label{
+  display:block;
+  font-weight:800;
+  color:#164f3c;
+  margin:0 0 7px;
+  font-size:14px;
+}
+
+/* INPUT */
+.input,
+.textarea{
+  width:100%;
+  border:1px solid #d5e5de;
+  border-radius:12px;
+  padding:13px 14px;
+  font-family:inherit;
+  font-size:15px;
+  outline:none;
+  background:#fbfefd;
+  color:#163e32;
+}
+
+.input{
+  height:50px;
+}
+
+.textarea{
+  min-height:125px;
+  resize:vertical;
+}
+
+/* INPUT FOCUS */
+.input:focus,
+.textarea:focus{
+  border-color:#0875ed;
+  box-shadow:0 0 0 3px rgba(8,117,237,.10);
+}
+
+/* SUBMIT BUTTON */
+.submit{
+  width:100%;
+  border:0;
+  background:#0875ed;
+  color:#fff;
+  padding:15px;
+  border-radius:32px;
+  font-family:inherit;
+  font-size:19px;
+  font-weight:900;
+  cursor:pointer;
+  box-shadow:0 8px 18px rgba(0,117,237,.18);
+}
+
+.submit:active{
+  transform:scale(.98);
+}
+
+/* INFORMATION NOTE */
+.note{
+  background:#e7f5ff;
+  border-radius:14px;
+  padding:13px;
+  margin-top:15px;
+  color:#31586f;
+  font-size:12px;
+  text-align:center;
+}
+
+/* EXTRA NOTICE */
+.warning{
+  margin-top:15px;
+  padding:14px;
+  border-radius:14px;
+  background:#fff5e6;
+  color:#754d12;
+  font-size:12px;
+  text-align:center;
+  font-weight:700;
+}
+
+/* FOOTER */
+.footer{
+  background:#075c3b;
+  color:#fff;
+  text-align:center;
+  padding:22px 15px;
+  font-size:12px;
+}
+
+.footer strong{
+  font-size:17px;
+}
+
+.footer p{
+  margin:6px 0 0;
+}
+
+/* MOBILE */
+@media(max-width:360px){
+
+  .brand h1{
+    font-size:18px;
+  }
+
+  .brand p{
+    font-size:11px;
+  }
+
+  .logo{
+    width:52px;
+    height:52px;
+  }
+
+  .title h2{
+    font-size:23px;
+  }
+
+  .form-card{
+    padding:15px;
+  }
+
+  .submit{
+    font-size:17px;
+  }
+}
+
+/* TABLET / DESKTOP */
+@media(min-width:600px){
+
+  body{
+    max-width:480px;
+    margin:auto;
+    box-shadow:0 0 30px rgba(0,0,0,.12);
+    min-height:100vh;
+  }
+
+}
+</style>
+</head>
+
+
+<body>
+
+<!-- DEMO NOTICE -->
+<div class="demo">
+  DEMO — এটি কোনো সরকারি ওয়েবসাইট নয়
+</div>
+
+
+<!-- TOP BAR -->
+<div class="top">
+  গণপ্রজাতন্ত্রী বাংলাদেশ — তথ্য ও সহায়তা ডেমো
+</div>
+
+
+<!-- HEADER -->
+<header class="header">
+
+  <div class="brand">
+
+    <div class="logo">
+      PASSPORT<br>
+      DEMO
+    </div>
+
+    <div>
+      <h1>পাসপোর্ট সহায়তা</h1>
+      <p>তথ্য ও সেবা নির্দেশিকা</p>
+    </div>
+
+  </div>
+
+  <button class="menu" type="button" aria-label="Menu">
+    ☰
+  </button>
+
+</header>
+
+
+<!-- MAIN CONTENT -->
+<main class="container">
+
+  <div class="title">
+
+    <span class="tag">
+      যোগাযোগ
+    </span>
+
+    <h2>
+      আপনার সমস্যাটি লিখে পাঠান
+    </h2>
+
+    <p>
+      নিচের তথ্যগুলো পূরণ করে আপনার সমস্যাটি পাঠাতে পারেন।
+    </p>
+
+  </div>
+
+
+  <!-- FORM -->
+  <form
+    class="form-card"
+    action="success.html"
+    method="get"
+  >
+
+    <!-- NAME -->
+    <div class="field">
+
+      <label for="name">
+        ১. আপনার নাম
+      </label>
+
+      <input
+        class="input"
+        id="name"
+        name="name"
+        type="text"
+        placeholder="আপনার নাম লিখুন"
+        autocomplete="name"
+        required
+      >
+
+    </div>
+
+
+    <!-- PASSPORT NUMBER -->
+    <div class="field">
+
+      <label for="passport">
+        ২. পাসপোর্ট নম্বর
+      </label>
+
+      <input
+        class="input"
+        id="passport"
+        name="passport"
+        type="text"
+        placeholder="পাসপোর্ট নম্বর লিখুন"
+        autocomplete="off"
+        required
+      >
+
+    </div>
+
+
+    <!-- CONTACT -->
+    <div class="field">
+
+      <label for="contact">
+        ৩. মোবাইল / ইমেইল
+      </label>
+
+      <input
+        class="input"
+        id="contact"
+        name="contact"
+        type="text"
+        placeholder="যোগাযোগের তথ্য লিখুন"
+        autocomplete="tel"
+        required
+      >
+
+    </div>
+
+
+    <!-- PROBLEM -->
+    <div class="field">
+
+      <label for="problem">
+        ৪. পাসপোর্টের সমস্যার বিবরণ
+      </label>
+
+      <textarea
+        class="textarea"
+        id="problem"
+        name="problem"
+        placeholder="আপনার সমস্যাটি বিস্তারিত লিখুন..."
+        required
+      ></textarea>
+
+    </div>
+
+
+    <!-- SUBMIT -->
+    <button
+      class="submit"
+      type="submit"
+    >
+      সমস্যাটি পাঠান &nbsp; ➜
+    </button>
+
+
+    <!-- NOTE -->
+    <div class="note">
+      এটি একটি ডেমো ফর্ম। এই পেজে তথ্য পূরণ করে
+      “সমস্যাটি পাঠান” বাটনে চাপলে পরবর্তী
+      <b>Success Page</b> খুলবে।
+    </div>
+
+
+    <!-- WARNING -->
+    <div class="warning">
+      ⚠️ নিরাপত্তার জন্য এখানে কোনো OTP,
+      পাসওয়ার্ড, ব্যাংক তথ্য বা কার্ডের তথ্য দেবেন না।
+    </div>
+
+  </form>
+
+</main>
+
+
+<!-- FOOTER -->
+<footer class="footer">
+
+  <strong>
+    পাসপোর্ট সহায়তা — DEMO
+  </strong>
+
+  <p>
+    এটি একটি ডিজাইন/কোডিং ডেমো।
+    কোনো সরকারি সেবা বা সরকারি ওয়েবসাইট নয়।
+  </p>
+
+</footer>
+
+
+</body>
+</html>
