@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DEMO Contact Form</title>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#f3f7f5;color:#123}
+.wrap{max-width:480px;margin:auto;min-height:100vh;background:white}
+.demo{background:#b42318;color:#fff;text-align:center;padding:9px;font-size:13px;font-weight:700}
+header{padding:22px 18px;background:#087f5b;color:#fff;text-align:center}
+h1{font-size:24px;margin:0 0 8px}.sub{font-size:14px;opacity:.95}
+main{padding:20px 16px 90px}
+label{display:block;font-weight:700;font-size:14px;margin:15px 0 7px}
+input,textarea{width:100%;padding:13px;border:1px solid #cbd5d1;border-radius:9px;font-size:16px;outline:none}
+textarea{min-height:120px;resize:vertical}
+button{width:100%;border:0;border-radius:9px;padding:14px;margin-top:20px;background:#0969da;color:#fff;font-size:17px;font-weight:700}
+button:disabled{opacity:.6}
+#status{margin-top:14px;text-align:center;font-size:14px}
+.success{display:none;text-align:center;padding:50px 20px}.check{font-size:60px}
+nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(480px,100%);background:#fff;border-top:1px solid #ddd;display:flex}
+nav a{flex:1;text-align:center;padding:14px 5px;text-decoration:none;color:#234;font-size:13px}
+.page{display:none}.page.active{display:block}
+.small{font-size:12px;color:#667;margin-top:14px;line-height:1.5}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="demo">DEMO — এটি কোনো সরকারি ওয়েবসাইট নয়</div>
+
+<section id="home" class="page active">
+<header><h1>যোগাযোগ ফর্ম</h1><div class="sub">আপনার বার্তা পাঠান</div></header>
+<main>
+<p>নিচের ফর্মে যে তথ্য লিখবেন, সেটিই একসাথে Telegram-এ পাঠানোর জন্য প্রস্তুত করা হয়েছে।</p>
+<button onclick="show('contact')">ফর্ম খুলুন</button>
+</main>
+</section>
+
+<section id="contact" class="page">
+<header><h1>তথ্য পাঠান</h1><div class="sub">শুধু ফর্মে দেওয়া তথ্য পাঠানো হবে</div></header>
+<main>
+<form id="form">
+<label>নাম</label>
+<input id="name" maxlength="100" autocomplete="name" required>
+
+<label>যোগাযোগ</label>
+<input id="contactInfo" maxlength="150" autocomplete="off" required>
+
+<label>বার্তা</label>
+<textarea id="message" maxlength="2000" required></textarea>
+
+<button id="send" type="submit">Telegram-এ পাঠান</button>
+<div id="status"></div>
+<p class="small">গুরুত্বপূর্ণ: এই এক-ফাইল সংস্করণে Bot Token ব্রাউজারে রাখতে হয়, তাই এটি পাবলিক ওয়েবসাইটে ব্যবহার করা নিরাপদ নয়। নিচের JavaScript-এ নিজের নতুন token বসাতে হলে প্রকাশ্যে শেয়ার করবেন না।</p>
+</form>
+</main>
+</section>
+
+<section id="success" class="page">
+<div class="success" style="display:block">
+<div class="check">✓</div>
+<h1>সফলভাবে পাঠানো হয়েছে</h1>
+<p>আপনার ফর্মের তথ্য Telegram-এ পাঠানো হয়েছে।</p>
+<button onclick="show('home')">হোমে ফিরুন</button>
+</div>
+</section>
+
+<nav>
+<a href="#home" onclick="show('home')">হোম</a>
+<a href="#contact" onclick="show('contact')">ফর্ম</a>
+<a href="#success" onclick="show('success')">সফল</a>
+</nav>
+</div>
+
+<script>
+// =====================================================
+// TELEGRAM SETTINGS
+// এখানে আপনার নতুন Bot Token এবং Chat ID বসাবেন।
+// পুরোনো/ফাঁস হওয়া token ব্যবহার করবেন না.
+// =====================================================
+const BOT_TOKEN = "8621142686:AAF2e0qgnO8bSWO4_oFkcIYT696ElLVbOyQ";
+const CHAT_ID   = "8516934257";
+
+function show(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  location.hash=id;
+  window.scrollTo(0,0);
+}
+
+if(location.hash && document.getElementById(location.hash.substring(1))){
+  show(location.hash.substring(1));
+}
+
+document.getElementById('form').addEventListener('submit', async function(e){
+  e.preventDefault();
+
+  const name = document.getElementById('name').value.trim();
+  const contact = document.getElementById('contactInfo').value.trim();
+  const message = document.getElementById('message').value.trim();
+  const status = document.getElementById('status');
+  const send = document.getElementById('send');
+
+  if(!name || !contact || !message) return;
+
+  if(BOT_TOKEN.includes("PASTE_") || CHAT_ID.includes("PASTE_")){
+    status.textContent = "প্রথমে Telegram Token ও Chat ID বসাতে হবে।";
+    status.style.color = "#b42318";
+    return;
+  }
+
+  const text =
+`📩 নতুন ফর্ম
+━━━━━━━━━━━━
+👤 নাম: ${name}
+📱 যোগাযোগ: ${contact}
+📝 বার্তা:
+${message}
+━━━━━━━━━━━━
+DEMO Form`;
+
+  send.disabled = true;
+  status.textContent = "পাঠানো হচ্ছে...";
+  status.style.color = "#555";
+
+  try{
+    const res = await fetch(
+      `https://api.telegram.org/bot${encodeURIComponent(BOT_TOKEN)}/sendMessage`,
+      {
+        method:"POST",
+        headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({
+          chat_id: CHAT_ID,
+          text: text
+        })
+      }
+    );
+
+    const data = await res.json();
+
+    if(data.ok){
+      document.getElementById('form').reset();
+      status.textContent = "";
+      show('success');
+    }else{
+      throw new Error(data.description || "Telegram error");
+    }
+  }catch(err){
+    status.textContent = "পাঠানো যায়নি। Token/Chat ID এবং ইন্টারনেট সংযোগ পরীক্ষা করুন।";
+    status.style.color = "#b42318";
+  }finally{
+    send.disabled = false;
+  }
+});
+</script>
+</body>
+</html>
